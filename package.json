@@ -1,6 +1,6 @@
 {
   "name": "jade-attrs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Generate code for jade attributes",
   "keywords": [],
   "dependencies": {
