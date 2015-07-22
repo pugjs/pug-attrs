@@ -103,10 +103,7 @@ function compileAttrs(attrs, options) {
     } else {
       classes = classes.map(function (cls, i) {
         if (isConstant(cls)) {
-          cls = stringify(runtime.classes(
-            [toConstant(cls)],
-            classEscaping[i]
-          ));
+          cls = stringify(classEscaping[i] ? runtime.escape(toConstant(cls)) : toConstant(cls));
           classEscaping[i] = false;
         }
         return cls;
