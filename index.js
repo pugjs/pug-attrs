@@ -55,7 +55,7 @@ function compileAttrs(attrs, options) {
           buf.push(str);
         }
       } else {
-        var val = toConstant(val);
+        val = toConstant(val);
         if (escaped) {
           val = runtime.escape(val);
         }
@@ -65,7 +65,6 @@ function compileAttrs(attrs, options) {
       if (options.format === 'html') {
         buf.push(options.runtime('attr') + '("' + key + '", ' + val + ', ' + stringify(escaped) + ', ' + stringify(options.terse) + ')');
       } else {
-        var val = val;
         if (escaped) {
           val = options.runtime('escape') + '(' + val + ')';
         }
