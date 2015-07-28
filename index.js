@@ -26,7 +26,7 @@ function compileAttrs(attrs, options) {
     return attr &&
       typeof attr === 'object' &&
       typeof attr.name === 'string' &&
-      typeof attr.val === 'string' &&
+      (typeof attr.val === 'string' || typeof attr.val === 'boolean') &&
       typeof attr.escaped === 'boolean';
   }), 'All attributes should be supplied as an object of the form {name, val, escaped}');
   assert(options && typeof options === 'object', 'Options should be an object');
