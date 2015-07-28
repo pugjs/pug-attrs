@@ -32,6 +32,8 @@ withOptions({terse: true, format: 'html', runtime: function (name) { return 'jad
   test([], '');
   test([{name: 'foo', val: 'false', escaped: true}], '');
   test([{name: 'foo', val: 'true', escaped: true}], ' foo');
+  test([{name: 'foo', val: false, escaped: true}], '');
+  test([{name: 'foo', val: true, escaped: true}], ' foo');
   test([{name: 'foo', val: 'foo', escaped: true}], '', {foo: false});
   test([{name: 'foo', val: 'foo', escaped: true}], ' foo', {foo: true});
   test([{name: 'foo', val: '"foo"', escaped: true}], ' foo="foo"');
@@ -52,6 +54,8 @@ withOptions({terse: true, format: 'html', runtime: function (name) { return 'jad
 withOptions({terse: false, format: 'html', runtime: function (name) { return 'jade.' + name; }}, function () {
   test([{name: 'foo', val: 'false', escaped: true}], '');
   test([{name: 'foo', val: 'true', escaped: true}], ' foo="foo"');
+  test([{name: 'foo', val: false, escaped: true}], '');
+  test([{name: 'foo', val: true, escaped: true}], ' foo="foo"');
   test([{name: 'foo', val: 'foo', escaped: true}], '', {foo: false});
   test([{name: 'foo', val: 'foo', escaped: true}], ' foo="foo"', {foo: true});
 });
@@ -60,6 +64,8 @@ withOptions({terse: true, format: 'object', runtime: function (name) { return 'j
   test([], {});
   test([{name: 'foo', val: 'false', escaped: true}], {foo: false});
   test([{name: 'foo', val: 'true', escaped: true}], {foo: true});
+  test([{name: 'foo', val: false, escaped: true}], {foo: false});
+  test([{name: 'foo', val: true, escaped: true}], {foo: true});
   test([{name: 'foo', val: 'foo', escaped: true}], {foo: false}, {foo: false});
   test([{name: 'foo', val: 'foo', escaped: true}], {foo: true}, {foo: true});
   test([{name: 'foo', val: '"foo"', escaped: true}], {foo: 'foo'});
@@ -80,6 +86,8 @@ withOptions({terse: true, format: 'object', runtime: function (name) { return 'j
 withOptions({terse: false, format: 'object', runtime: function (name) { return 'jade.' + name; }}, function () {
   test([{name: 'foo', val: 'false', escaped: true}], {foo: false});
   test([{name: 'foo', val: 'true', escaped: true}], {foo: true});
+  test([{name: 'foo', val: false, escaped: true}], {foo: false});
+  test([{name: 'foo', val: true, escaped: true}], {foo: true});
   test([{name: 'foo', val: 'foo', escaped: true}], {foo: false}, {foo: false});
   test([{name: 'foo', val: 'foo', escaped: true}], {foo: true}, {foo: true});
 });
