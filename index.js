@@ -44,7 +44,7 @@ function compileAttrs(attrs, options) {
   var classes = [];
   var classEscaping = [];
 
-  function addAttribute(key, val, escaped) {
+  function addAttribute(key, val, escaped, buf) {
     if (isConstant(val)) {
       if (options.format === 'html') {
         var str = stringify(runtime.attr(key, toConstant(val), escaped, options.terse));
@@ -89,15 +89,17 @@ function compileAttrs(attrs, options) {
           val = options.runtime('style') + '(' + val + ')';
         }
       }
-      addAttribute(key, val, escaped);
+      addAttribute(key, val, escaped, buf);
     }
   });
+  var classesBuf = [];
   if (classes.length) {
     if (classes.every(isConstant)) {
       addAttribute(
         'class',
         stringify(runtime.classes(classes.map(toConstant), classEscaping)),
-        false
+        false,
+        classesBuf
       );
     } else {
       classes = classes.map(function (cls, i) {
@@ -110,10 +112,12 @@ function compileAttrs(attrs, options) {
       addAttribute(
         'class',
         options.runtime('classes') + '([' + classes.join(',') + '], ' + stringify(classEscaping) + ')',
-        false
+        false,
+        classesBuf
       );
     }
   }
+  buf = classesBuf.concat(buf);
   if (options.format === 'html') return buf.length ? buf.join('+') : '""';
   else return '{' + buf.join(',') + '}';
 }
