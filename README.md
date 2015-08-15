@@ -12,6 +12,10 @@ Generate code for Jade attributes
 
 ## Usage
 
+```js
+var compileAttrs = require('jade-attrs');
+```
+
 ### `compileAttrs(attrs, options)`
 
 Compile `attrs` to a JavaScript string that evaluates to the attributes in the desired format.
@@ -25,7 +29,7 @@ Compile `attrs` to a JavaScript string that evaluates to the attributes in the d
 `attrs` is an array of attributes, with each attribute having the form of `{ name, val, escaped }`. `val` represents a JavaScript string that evaluates to the value of the attribute, either statically or dynamically.
 
 ```js
-var compileAttrs = require('.');
+var compileAttrs = require('jade-attrs');
 var jadeRuntime = require('jade-runtime');
 
 function getBaz () { return 'baz<>'; }
