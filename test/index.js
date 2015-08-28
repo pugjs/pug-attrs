@@ -46,6 +46,8 @@ withOptions({terse: true, format: 'html', runtime: function (name) { return 'jad
   test([{name: 'class', val: '{foo: foo}', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], ' class="foo bar baz"', {foo: true});
   test([{name: 'class', val: '{foo: foo}', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], ' class="bar baz"', {foo: false});
   test([{name: 'class', val: 'foo', escaped: true}, {name: 'class', val: '"<str>"', escaped: true}], ' class="&lt;foo&gt; &lt;str&gt;"', {foo: '<foo>'});
+  test([{name: 'foo', val: '"foo"', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], ' class="bar baz" foo="foo"');
+  test([{name: 'class', val: '["bar", "baz"]', escaped: true}, {name: 'foo', val: '"foo"', escaped: true}], ' class="bar baz" foo="foo"');
   test([{name: 'foo', val: '"<foo>"', escaped: false}], ' foo="<foo>"');
   test([{name: 'foo', val: '"<foo>"', escaped: true}], ' foo="&lt;foo&gt;"');
   test([{name: 'foo', val: 'foo', escaped: false}], ' foo="<foo>"', {foo: '<foo>'});
@@ -78,6 +80,8 @@ withOptions({terse: true, format: 'object', runtime: function (name) { return 'j
   test([{name: 'class', val: '{foo: foo}', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], {'class': 'foo bar baz'}, {foo: true});
   test([{name: 'class', val: '{foo: foo}', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], {'class': 'bar baz'}, {foo: false});
   test([{name: 'class', val: 'foo', escaped: true}, {name: 'class', val: '"<str>"', escaped: true}], {'class': '&lt;foo&gt; &lt;str&gt;'}, {foo: '<foo>'});
+  test([{name: 'foo', val: '"foo"', escaped: true}, {name: 'class', val: '["bar", "baz"]', escaped: true}], {'class': 'bar baz', foo: 'foo'});
+  test([{name: 'class', val: '["bar", "baz"]', escaped: true}, {name: 'foo', val: '"foo"', escaped: true}], {'class': 'bar baz', foo: 'foo'});
   test([{name: 'foo', val: '"<foo>"', escaped: false}], {foo: "<foo>"});
   test([{name: 'foo', val: '"<foo>"', escaped: true}], {foo: "&lt;foo&gt;"});
   test([{name: 'foo', val: 'foo', escaped: false}], {foo: "<foo>"}, {foo: '<foo>'});
