@@ -4,7 +4,6 @@ var assert = require('assert');
 var constantinople = require('constantinople');
 var runtime = require('jade-runtime');
 var stringify = require('js-stringify');
-var halts = require('halting-problem');
 
 function isConstant(src) {
   return constantinople(src, {jade: runtime, 'jade_interp': undefined});

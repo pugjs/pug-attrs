@@ -5,7 +5,6 @@
   "keywords": [],
   "dependencies": {
     "constantinople": "^3.0.1",
-    "halting-problem": "^1.0.0",
     "jade-runtime": "^1.1.0",
     "js-stringify": "^1.0.1"
   },
