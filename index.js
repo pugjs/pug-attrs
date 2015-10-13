@@ -26,8 +26,8 @@ function compileAttrs(attrs, options) {
       typeof attr === 'object' &&
       typeof attr.name === 'string' &&
       (typeof attr.val === 'string' || typeof attr.val === 'boolean') &&
-      typeof attr.escaped === 'boolean';
-  }), 'All attributes should be supplied as an object of the form {name, val, escaped}');
+      typeof attr.mustEscape === 'boolean';
+  }), 'All attributes should be supplied as an object of the form {name, val, mustEscape}');
   assert(options && typeof options === 'object', 'Options should be an object');
   assert(typeof options.terse === 'boolean', 'Options.terse should be a boolean');
   assert(
@@ -43,10 +43,10 @@ function compileAttrs(attrs, options) {
   var classes = [];
   var classEscaping = [];
 
-  function addAttribute(key, val, escaped, buf) {
+  function addAttribute(key, val, mustEscape, buf) {
     if (isConstant(val)) {
       if (options.format === 'html') {
-        var str = stringify(runtime.attr(key, toConstant(val), escaped, options.terse));
+        var str = stringify(runtime.attr(key, toConstant(val), mustEscape, options.terse));
         var last = buf[buf.length - 1];
         if (last && last[last.length - 1] === str[0]) {
           buf[buf.length - 1] = last.substr(0, last.length - 1) + str.substr(1);
@@ -55,16 +55,16 @@ function compileAttrs(attrs, options) {
         }
       } else {
         val = toConstant(val);
-        if (escaped) {
+        if (mustEscape) {
           val = runtime.escape(val);
         }
         buf.push(stringify(key) + ': ' + stringify(val));
       }
     } else {
       if (options.format === 'html') {
-        buf.push(options.runtime('attr') + '("' + key + '", ' + val + ', ' + stringify(escaped) + ', ' + stringify(options.terse) + ')');
+        buf.push(options.runtime('attr') + '("' + key + '", ' + val + ', ' + stringify(mustEscape) + ', ' + stringify(options.terse) + ')');
       } else {
-        if (escaped) {
+        if (mustEscape) {
           val = options.runtime('escape') + '(' + val + ')';
         }
         buf.push(stringify(key) + ': ' + val);
@@ -75,11 +75,11 @@ function compileAttrs(attrs, options) {
   attrs.forEach(function(attr){
     var key = attr.name;
     var val = attr.val;
-    var escaped = attr.escaped;
+    var mustEscape = attr.mustEscape;
 
     if (key === 'class') {
       classes.push(val);
-      classEscaping.push(escaped);
+      classEscaping.push(mustEscape);
     } else {
       if (key === 'style') {
         if (isConstant(val)) {
@@ -88,7 +88,7 @@ function compileAttrs(attrs, options) {
           val = options.runtime('style') + '(' + val + ')';
         }
       }
-      addAttribute(key, val, escaped, buf);
+      addAttribute(key, val, mustEscape, buf);
     }
   });
   var classesBuf = [];
