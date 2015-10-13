@@ -26,7 +26,7 @@ Compile `attrs` to a JavaScript string that evaluates to the attributes in the d
 - `runtime`: callback that takes a runtime function name and returns the source code that will evaluate to that function at runtime
 - `format`: output format; must be `html` or `object`
 
-`attrs` is an array of attributes, with each attribute having the form of `{ name, val, escaped }`. `val` represents a JavaScript string that evaluates to the value of the attribute, either statically or dynamically.
+`attrs` is an array of attributes, with each attribute having the form of `{ name, val, mustEscape }`. `val` represents a JavaScript string that evaluates to the value of the attribute, either statically or dynamically.
 
 ```js
 var compileAttrs = require('jade-attrs');
@@ -35,9 +35,9 @@ var jadeRuntime = require('jade-runtime');
 function getBaz () { return 'baz<>'; }
 
 var attrs = [
-  {name: 'foo',  val: '"bar"',    escaped: true },
-  {name: 'baz',  val: 'getBaz()', escaped: true },
-  {name: 'quux', val: true,       escaped: false}
+  {name: 'foo',  val: '"bar"',    mustEscape: true },
+  {name: 'baz',  val: 'getBaz()', mustEscape: true },
+  {name: 'quux', val: true,       mustEscape: false}
 ];
 var result, finalResult;
 
