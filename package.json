@@ -1,8 +1,10 @@
 {
   "name": "jade-attrs",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Generate code for jade attributes",
-  "keywords": [],
+  "keywords": [
+    "jade"
+  ],
   "dependencies": {
     "constantinople": "^3.0.1",
     "jade-runtime": "^1.1.0",
