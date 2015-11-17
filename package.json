@@ -7,11 +7,11 @@
   ],
   "dependencies": {
     "constantinople": "^3.0.1",
-    "jade-runtime": "^1.1.0",
+    "jade-runtime": "^2.0.0",
     "js-stringify": "^1.0.1"
   },
   "devDependencies": {
-    "istanbul": "^0.3.17",
+    "istanbul": "*",
     "testit": "^2.0.2"
   },
   "scripts": {
