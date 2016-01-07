@@ -9,7 +9,7 @@ var options;
 function test(input, expected, locals) {
   var opts = options;
   locals = locals || {};
-  locals.jade = locals.jade || require('jade-runtime');
+  locals.pug = locals.pug || require('pug-runtime');
   testit(utils.inspect(input).replace(/\n/g, '') + ' => ' + utils.inspect(expected), function () {
     var src = attrs(input, opts);
     var localKeys = Object.keys(locals).sort();
@@ -28,7 +28,7 @@ function withOptions(opts, fn) {
   });
 }
 
-withOptions({terse: true, format: 'html', runtime: function (name) { return 'jade.' + name; }}, function () {
+withOptions({terse: true, format: 'html', runtime: function (name) { return 'pug.' + name; }}, function () {
   test([], '');
   test([{name: 'foo', val: 'false', mustEscape: true}], '');
   test([{name: 'foo', val: 'true', mustEscape: true}], ' foo');
@@ -53,7 +53,7 @@ withOptions({terse: true, format: 'html', runtime: function (name) { return 'jad
   test([{name: 'foo', val: 'foo', mustEscape: false}], ' foo="<foo>"', {foo: '<foo>'});
   test([{name: 'foo', val: 'foo', mustEscape: true}], ' foo="&lt;foo&gt;"', {foo: '<foo>'});
 });
-withOptions({terse: false, format: 'html', runtime: function (name) { return 'jade.' + name; }}, function () {
+withOptions({terse: false, format: 'html', runtime: function (name) { return 'pug.' + name; }}, function () {
   test([{name: 'foo', val: 'false', mustEscape: true}], '');
   test([{name: 'foo', val: 'true', mustEscape: true}], ' foo="foo"');
   test([{name: 'foo', val: false, mustEscape: true}], '');
@@ -62,7 +62,7 @@ withOptions({terse: false, format: 'html', runtime: function (name) { return 'ja
   test([{name: 'foo', val: 'foo', mustEscape: true}], ' foo="foo"', {foo: true});
 });
 
-withOptions({terse: true, format: 'object', runtime: function (name) { return 'jade.' + name; }}, function () {
+withOptions({terse: true, format: 'object', runtime: function (name) { return 'pug.' + name; }}, function () {
   test([], {});
   test([{name: 'foo', val: 'false', mustEscape: true}], {foo: false});
   test([{name: 'foo', val: 'true', mustEscape: true}], {foo: true});
@@ -87,7 +87,7 @@ withOptions({terse: true, format: 'object', runtime: function (name) { return 'j
   test([{name: 'foo', val: 'foo', mustEscape: false}], {foo: "<foo>"}, {foo: '<foo>'});
   test([{name: 'foo', val: 'foo', mustEscape: true}], {foo: "&lt;foo&gt;"}, {foo: '<foo>'});
 });
-withOptions({terse: false, format: 'object', runtime: function (name) { return 'jade.' + name; }}, function () {
+withOptions({terse: false, format: 'object', runtime: function (name) { return 'pug.' + name; }}, function () {
   test([{name: 'foo', val: 'false', mustEscape: true}], {foo: false});
   test([{name: 'foo', val: 'true', mustEscape: true}], {foo: true});
   test([{name: 'foo', val: false, mustEscape: true}], {foo: false});

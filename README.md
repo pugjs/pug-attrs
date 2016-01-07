@@ -1,19 +1,19 @@
-# jade-attrs
+# pug-attrs
 
-Generate code for Jade attributes
+Generate code for Pug attributes
 
-[![Build Status](https://img.shields.io/travis/jadejs/jade-attrs/master.svg)](https://travis-ci.org/jadejs/jade-attrs)
-[![Dependency Status](https://img.shields.io/gemnasium/jadejs/jade-attrs.svg)](https://gemnasium.com/jadejs/jade-attrs)
-[![NPM version](https://img.shields.io/npm/v/jade-attrs.svg)](https://www.npmjs.org/package/jade-attrs)
+[![Build Status](https://img.shields.io/travis/pugjs/pug-attrs/master.svg)](https://travis-ci.org/pugjs/pug-attrs)
+[![Dependency Status](https://img.shields.io/david/pugjs/pug-attrs.svg)](https://david-dm.org/pugjs/pug-attrs)
+[![NPM version](https://img.shields.io/npm/v/pug-attrs.svg)](https://www.npmjs.org/package/pug-attrs)
 
 ## Installation
 
-    npm install jade-attrs
+    npm install pug-attrs
 
 ## Usage
 
 ```js
-var compileAttrs = require('jade-attrs');
+var compileAttrs = require('pug-attrs');
 ```
 
 ### `compileAttrs(attrs, options)`
@@ -29,8 +29,8 @@ Compile `attrs` to a JavaScript string that evaluates to the attributes in the d
 `attrs` is an array of attributes, with each attribute having the form of `{ name, val, mustEscape }`. `val` represents a JavaScript string that evaluates to the value of the attribute, either statically or dynamically.
 
 ```js
-var compileAttrs = require('jade-attrs');
-var jadeRuntime = require('jade-runtime');
+var compileAttrs = require('pug-attrs');
+var pugRuntime = require('pug-runtime');
 
 function getBaz () { return 'baz<>'; }
 
@@ -45,28 +45,28 @@ var result, finalResult;
 result = compileAttrs(attrs, {
   terse:   true,
   format:  'html',
-  runtime: function (name) { return 'jadeRuntime.' + name; }
+  runtime: function (name) { return 'pugRuntime.' + name; }
 });
-//=> '" foo=\\"bar\\"" + jadeRuntime.attr("baz", getBaz(), true, true) + " quux"'
+//=> '" foo=\\"bar\\"" + pugRuntime.attr("baz", getBaz(), true, true) + " quux"'
 
-finalResult = Function('jadeRuntime, getBaz',
+finalResult = Function('pugRuntime, getBaz',
   'return (' + result + ');'
 );
-finalResult(jadeRuntime, getBaz);
+finalResult(pugRuntime, getBaz);
 // => ' foo="bar" baz="baz&lt;&gt;" quux'
 
 // OBJECT MODE
 result = compileAttrs(attrs, {
   terse:   true,
   format:  'object',
-  runtime: function (name) { return 'jadeRuntime.' + name; }
+  runtime: function (name) { return 'pugRuntime.' + name; }
 });
-//=> '{"foo": "bar","baz": jadeRuntime.escape(getBaz()),"quux": true}'
+//=> '{"foo": "bar","baz": pugRuntime.escape(getBaz()),"quux": true}'
 
-finalResult = Function('jadeRuntime, getBaz',
+finalResult = Function('pugRuntime, getBaz',
   'return (' + result + ');'
 );
-finalResult(jadeRuntime, getBaz);
+finalResult(pugRuntime, getBaz);
 //=> { foo: 'bar', baz: 'baz&lt;&gt;', quux: true }
 ```
 
