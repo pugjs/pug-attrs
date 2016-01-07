@@ -1,6 +1,6 @@
 {
   "name": "pug-attrs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generate code for Pug attributes",
   "keywords": [
     "pug"
