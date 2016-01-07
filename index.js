@@ -2,14 +2,14 @@
 
 var assert = require('assert');
 var constantinople = require('constantinople');
-var runtime = require('jade-runtime');
+var runtime = require('pug-runtime');
 var stringify = require('js-stringify');
 
 function isConstant(src) {
-  return constantinople(src, {jade: runtime, 'jade_interp': undefined});
+  return constantinople(src, {pug: runtime, 'pug_interp': undefined});
 }
 function toConstant(src) {
-  return constantinople.toConstant(src, {jade: runtime, 'jade_interp': undefined});
+  return constantinople.toConstant(src, {pug: runtime, 'pug_interp': undefined});
 }
 
 module.exports = compileAttrs;
